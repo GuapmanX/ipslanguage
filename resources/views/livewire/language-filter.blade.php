@@ -2,6 +2,7 @@
 
 <div>
     {{-- Be like water. --}}
+    <p><strong>Filter Languages:</strong></p>
     <select
          type="text"
          class="p-4 border rounded-md bg-gray-700 text-white"
@@ -12,7 +13,6 @@
         
     @foreach($SupportedLanguages as $Language)
         <option value="{{$Language['Language']}}">{{$Language['Language']}}</option>
-
     @endforeach
     </select>
 </div>
