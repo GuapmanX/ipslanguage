@@ -9,7 +9,7 @@ class Course extends Model
     protected $table = "cp_courses";
     public $translatables = ["title","description"]; //the parameters in the sql database that are translatable
 
-    public function GetModules()
+    public function Modules()
     {
         return $this->hasMany(Module::class); //Gets all the modules related to the course
     }

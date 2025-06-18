@@ -56,7 +56,7 @@ function CreateTranslatedTree($Courses,$SupportedLanguages){
         "Name" => $CourseObject->title,
         "id" => $CourseObject->id
         ]; 
-       $Modules = $Courses[$CourseINT]->GetModules; //$Courses[$CourseINT]::with('GetModules')->get();
+       $Modules = $Courses[$CourseINT]->Modules; //$Courses[$CourseINT]::with('GetModules')->get();
        for($ModuleINT = 0; $ModuleINT < count($Modules); $ModuleINT++)
         {
             $ModuleObject = $Modules[$ModuleINT];
@@ -67,19 +67,22 @@ function CreateTranslatedTree($Courses,$SupportedLanguages){
                 "id" => $ModuleObject->id
             ];
 
-            $Lessons = $ModuleObject->GetLessons;
+            $Lessons = $ModuleObject->Lessons;
             for($LessonInt = 0; $LessonInt < count($Lessons); $LessonInt++)
             {
                 
-                $Content = $Lessons[$LessonInt]->GetLessonContent();
-                if ($Content){
-                    $Data[$CourseINT]["Children"][$ModuleINT]["Children"][$LessonInt] = [
-                        "Object" => $Content,"Children" => [],
-                        "TranslateData" => GiveTranslatedPercent($Content->GetLanguages($SupportedLanguages),$Content->GetTranslatables()),
-                        "Name" => $Content->title,
-                        "id" => $Content->id
-                    ];
-                }
+                $Content = $Lessons[$LessonInt]->LessonContent;
+                foreach($Content as $Contents) {
+                    //dd($Contents);
+                    if ($Contents){
+                        $Data[$CourseINT]["Children"][$ModuleINT]["Children"][$LessonInt] = [
+                            "Object" => $Contents,"Children" => [],
+                            "TranslateData" => GiveTranslatedPercent($Contents->GetLanguages($SupportedLanguages),$Contents->GetTranslatables()),
+                            "Name" => $Contents->title,
+                            "id" => $Contents->id
+                        ];
+                    }
+                };
             }
 
         }

@@ -3,23 +3,19 @@
 use Illuminate\Support\Facades\Route;
 //use Livewire\Volt\Volt;
 //use App\Models;
-//use App\Models\Course;
+use App\Models\Course;
 //use App\Models\Lesson;
 //use Illuminate\Support\Facades\DB;
 
 
 require(base_path('resources\php\LanguageDataCompiler.php'));
-//$SupportedLanguages = require(base_path('resources\php\Languages.php'));
+$SupportedLanguages = require(base_path('resources\php\Languages.php'));
 
 //$CourseLangs = Course::first()->GetLanguages($SupportedLanguages);
 //$ModuleLangs = Course::first()->GetModules[1]->GetLanguages($SupportedLanguages);
 //$Content = Course::first()->GetModules[1]->GetLessons[2]->GetLessonContent()->GetLanguages($SupportedLanguages);
 
-//dd(CreateTranslatedTree(Course::all(),$SupportedLanguages));
-//dd(GiveTranslatedPercent(Course::first()->GetLanguages($SupportedLanguages),Course::first()->GetTranslatables()));
-//dd(CreateTranslatedTree(Course::all(),$SupportedLanguages));
-//dd($Link);
-//dd(Course::all());
+//dd(Course::first()->GetModules[1]->GetLessons[2],Course::first()->GetModules[1]->GetLessons[2]->GetLessonContent);
 
 
 Route::get('/', function () {

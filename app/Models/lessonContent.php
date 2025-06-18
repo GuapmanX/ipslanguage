@@ -19,7 +19,7 @@ class lessonContent extends Model
         return $this->translatables;
     }
 
-        public function GetLanguages($SupportedLanguages)
+    public function GetLanguages($SupportedLanguages)
     {
         //empty($v)
         $translated = [];

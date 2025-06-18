@@ -100,9 +100,9 @@ class TranslateMenu extends Component
             $FilteredLanguages[] = $SupportedLanguages[$this->Filter];
         }
 
-        $courses = Course::with('GetModules.GetLessons')->get();
+        $courses = Course::with('Modules.Lessons.LessonContent')->get();
         $Tree = CreateTranslatedTree($courses,$FilteredLanguages);
-        //dd($Tree);
+        
         return view('livewire.translate-menu',[
          'Courses' => $Tree
         ]

@@ -15,7 +15,7 @@ class Module extends Model
         return $this->belongsTo(Course::class); //Gets the Course that the module belongs to
     }
 
-    public function GetLessons()
+    public function Lessons()
     {
         return $this->hasMany(Lesson::class);
     }
