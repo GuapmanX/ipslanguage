@@ -16,7 +16,7 @@ $SupportedLanguages = require(base_path('resources\php\Languages.php'));
 //$Content = Course::first()->GetModules[1]->GetLessons[2]->GetLessonContent()->GetLanguages($SupportedLanguages);
 
 //dd(Course::first()->GetModules[1]->GetLessons[2],Course::first()->GetModules[1]->GetLessons[2]->GetLessonContent);
-
+//dd(Course::first()->Modules[1]->Lessons[4]->LessonContent[0]->Lesson);
 
 Route::get('/', function () {
     return view('home');

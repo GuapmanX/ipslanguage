@@ -2,6 +2,7 @@
     <x-slot:heading>
         Translate percentage
     </x-slot:heading> 
-    <livewire:LanguageFilter>
-     <livewire:TranslateMenu>
+    {{-- <livewire:accordion text="lil b" language="bri'ish" percentage="12"> --}} 
+      <livewire:LanguageFilter>
+      <livewire:TranslateMenu>
 </x-layout>

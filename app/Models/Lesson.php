@@ -9,7 +9,11 @@ class Lesson extends Model
 {
     protected $table = "cp_lessons";
     private $ContentLinkTable = "cp_lesson_revisions";
-    
+
+    public function Module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 
     public function LessonContent()
     {

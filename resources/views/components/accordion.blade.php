@@ -1,7 +1,4 @@
 <div>
-      <style>
-        
-      </style>
      <div class="max-w-2xl mx-auto {{$bgColor}} shadow-md rounded-lg divide-y divide-gray-200">
     <!-- Language Row Component -->
     <div class="group">
@@ -32,8 +29,6 @@
               function toggleRow(button) {
                 const content = button.nextElementSibling;
                 content.classList.toggle('hidden');
-
-                //const arrow = button
               }
       </script>
   </div>

@@ -8,13 +8,14 @@ class lessonContent extends Model
 {
     protected $table = "cp_lesson_contents";
     public $translatables = ["title","notes","summary","cta_text"]; //the parameters in the sql database that are translatable
+    private $ContentLinkTable = "cp_lesson_revisions";
 
-    public function Hello()
+    public function Lesson()
     {
-        dd("Hello");
+        return $this->belongsToMany(Lesson::class,$this->ContentLinkTable);
     }
 
- public function GetTranslatables()
+    public function GetTranslatables()
     {
         return $this->translatables;
     }

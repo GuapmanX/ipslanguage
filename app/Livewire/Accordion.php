@@ -7,11 +7,15 @@ use Livewire\Component;
 class Accordion extends Component
 {
     public $show = false;
-    public $search;
+    public $text;
+    public $percentage;
+    public $language;
     
-    public function mount($search)
+    public function mount($text,$language,$percentage)
     {
-        $this->search = $search;
+        $this->text = $text;
+        $this->language = $language;
+        $this->percentage = $percentage;
     }
 
     public function ToggleRow()
