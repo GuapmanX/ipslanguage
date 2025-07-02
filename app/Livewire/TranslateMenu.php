@@ -7,8 +7,8 @@ use App\Models;
 use App\Models\Course;
 use Illuminate\Support\Facades\Blade;
 use Livewire\Attributes\On;
-
-
+use LanguageCompiler;
+use LanguageCompiler\LanguageDataCompiler;
 
 class TranslateMenu extends Component
 {
@@ -17,7 +17,7 @@ class TranslateMenu extends Component
 
     public $Filter = "All";
 
-    public function GetLessonContent($children)
+    public function DrawLessonContent($children)
     {
         $canvas = "";
         foreach($children as $Content)
@@ -28,15 +28,28 @@ class TranslateMenu extends Component
     }
 
 
-    public function GetModules($children){
+    public function DrawModules($children){
         $canvas = "";
         foreach($children as $Module)
         {
              $canvas .= $this->DrawAccordionMenu(false,$Module['Name'],$this->CalulateTranslateAverage($Module['TranslateData']),"bg-amber-100",
-             $this->GetLessonContent($Module['Children'])
+             $this->DrawLessonContent($Module['Children'])
             );
         }
         return $canvas;
+    }
+
+    public function DrawCourses($Courses)
+    {
+        foreach($Courses as $Course){
+                $this->DrawAccordionMenu(
+                    true,
+                    $Course['Name'],
+                    $this->CalulateTranslateAverage($Course['TranslateData']),
+                    "bg-white",
+                    $this->DrawModules($Course['Children'])
+            );
+        }
     }
 
     public function DrawAccordionMenu($Render,$Language,$Percent,$Color,$WhatsInDropdown){
@@ -101,8 +114,7 @@ class TranslateMenu extends Component
         }
 
         $courses = Course::with('Modules.Lessons.LessonContent')->get();
-        $Tree = CreateTranslatedTree($courses,$FilteredLanguages);
-        
+        $Tree = LanguageDataCompiler::CreateTranslatedTree($courses,$FilteredLanguages);
         return view('livewire.translate-menu',[
          'Courses' => $Tree
         ]
