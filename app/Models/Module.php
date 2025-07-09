@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Module extends Model
 {
-    //
+    use HasFactory;
+    
     protected $table = "cp_modules";
     public $translatables = ["title","subtitle",]; //the parameters in the sql database that are translatable
 

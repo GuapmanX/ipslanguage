@@ -12,7 +12,7 @@ class LanguageFilter extends Component
     public function ChangeFilter($newfilter)
     {
         $this->SelectedFilter = $newfilter;
-        $this->dispatch("FilterChanged", NewFilter: $this->SelectedFilter);
+        return $this->dispatch("FilterChanged", NewFilter: $this->SelectedFilter);
     }
 
     public function render()

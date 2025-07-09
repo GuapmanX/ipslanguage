@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class lessonContent extends Model
 {
+    use HasFactory;
     protected $table = "cp_lesson_contents";
     public $translatables = ["title","notes","summary","cta_text"]; //the parameters in the sql database that are translatable
     private $ContentLinkTable = "cp_lesson_revisions";

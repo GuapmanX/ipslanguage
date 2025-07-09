@@ -6,18 +6,36 @@
 use App\Livewire\LanguageFilter;
 use App\Livewire\TranslateMenu;
 use Livewire\Livewire;
-
+use Tests\TestCase;
 
 test('Translate Menu gets rendered', function(){
     $menu = Livewire::test(TranslateMenu::class);
     $menu->assertStatus(200);
-    expect($menu->Filter)->toBe("All");
 });
 
-/* test('Filter can be changed',function(){ //doesnt work
-    //$menu = Livewire::test(TranslateMenu::class);
-    $filter = Livewire::test(LanguageFilter::class);
-    $filter->emit("FilterChanged","Polish");
+test('Filter Menu gets rendered', function(){
+    $menu = Livewire::test(LanguageFilter::class);
+    $menu->assertStatus(200);
+});
 
-    //expect($menu->Filter)->toBe("Polish");
-}); */
+
+
+test('Filter can be changed', function(){
+    $languages = require base_path("resources/php/Languages.php");
+    $selectedLanguage = SelectRandomLanguage($languages)['Language'];
+
+    $filter = Livewire::test(LanguageFilter::class);
+    $filter->call('ChangeFilter',$selectedLanguage);
+    
+    expect($filter->SelectedFilter)->toBe($selectedLanguage);
+});
+
+test('Can change shown languge in the menu',function(){
+    $languages = require base_path("resources/php/Languages.php");
+    $selectedLanguage = SelectRandomLanguage($languages)['Language'];
+
+    $menu = Livewire::test(TranslateMenu::class);
+    $menu->dispatch("FilterChanged",$selectedLanguage);
+
+    expect($menu->Filter)->toBe($selectedLanguage);
+});

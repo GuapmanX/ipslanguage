@@ -47,3 +47,21 @@ function login($user = null)
 {
     return test()->actingAs($user ?? User::factory()->create());
 }
+
+function SelectRandomLanguage($languages){
+    $selected = rand(0, sizeof($languages) - 1);
+    $current = 0;
+    foreach($languages as $language)
+    {
+        if($selected == $current){
+            return $language;
+        }
+        $current++;
+    }
+}
+
+function CheckChildrenPercent($arr,$desiredPercent){
+            foreach($arr as $Translatable){
+               expect($Translatable['TranslatedPercent'])->toBe($desiredPercent);
+          }
+}
