@@ -3,7 +3,9 @@
 use LanguageCompiler\LanguageDataCompiler;
 use App\Models\Course;
 use App\Models\lessonRevisions;
-
+use Illuminate\Foundation\Testing\RefreshDatabase;
+ 
+uses(RefreshDatabase::class);
 /* test('the proper percentage is displayed',function(){
      $languages = require base_path("resources/php/Languages.php");
      $selectedLanguage = [SelectRandomLanguage($languages)];
@@ -15,6 +17,7 @@ use App\Models\lessonRevisions;
 
 test('Translate Tree percentage is accessible',function(){
      //Initialization//////////
+     //config('Languages')
      $SupportedLanguages = require(base_path('resources\php\Languages.php'));
      $LessonRevision = lessonRevisions::factory()->create();
      $LessonContent = $LessonRevision->Content;

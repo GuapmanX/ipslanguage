@@ -10,6 +10,12 @@ class Main extends Controller
     //
     public function index()
     {
-        return view('home',[ 'email' => Auth::user()->email ]);
+        $currentUser = Auth::user();
+
+        return view('home',[
+              'email' => $currentUser->email,
+              'Language' => $currentUser->selected_language,
+              'is_admin' => $currentUser->is_admin
+             ]);
     }
 }

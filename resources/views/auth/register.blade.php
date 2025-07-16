@@ -45,7 +45,23 @@
                           <x-form-error name="password_confirmation"/>
                   </div>
               </x-form-field>
-            </div>
+
+              <x-form-field>
+                  <x-form-label for="selected_language">Select language</x-form-label>
+
+                  <x-form-select name="selected_language" id="selected_language" type="text">
+                                @foreach($SupportedLanguages as $Language)
+                                    <option value="{{$Language['Language']}}">{{$Language['Language']}}</option>
+                                @endforeach
+                  </x-form-select>
+              </x-form-field>
+
+              <x-form-field>
+                  <x-form-label for="is_admin">Would you like to be an admin?</x-form-label>
+                            <input type="checkbox" id="is_admin" name="is_admin" value="true">
+              </x-form-field>
+
+          </div>
 
         <div class="mt-6 flex items-center justify-end gap-x-6">
           <a href="/" type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</a>

@@ -12,6 +12,7 @@ class Lesson extends Model
 
     protected $table = "cp_lessons";
     private $ContentLinkTable = "cp_lesson_revisions";
+    protected $guarded = ['id'];
 
     public function Module()
     {

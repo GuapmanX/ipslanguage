@@ -27,6 +27,12 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
 
+              @isset($isadmin)
+                  @if($isadmin)
+                      <x-nav-link href="admin" :active="request()->is('admin')">Admin Panel</x-nav-link>
+                  @endif
+              @endisset
+
 
             </div>
           </div>

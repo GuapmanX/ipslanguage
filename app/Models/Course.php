@@ -11,6 +11,7 @@ class Course extends Model
 
     protected $table = "cp_courses";
     public $translatables = ["title","description"]; //the parameters in the sql database that are translatable
+    protected $guarded = ['id'];
 
     public function Modules()
     {
@@ -22,7 +23,7 @@ class Course extends Model
         return $this->translatables;
     }
 
-        public function GetLanguages($SupportedLanguages)
+    public function GetLanguages($SupportedLanguages)
     {
         //empty($v)
         $translated = [];

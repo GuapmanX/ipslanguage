@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class LanguageFilter extends Component
 {
-
+    
     public $SelectedFilter ='';
 
     public function ChangeFilter($newfilter)

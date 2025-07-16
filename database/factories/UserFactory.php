@@ -23,6 +23,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        //fake()->word()
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),

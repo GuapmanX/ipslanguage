@@ -17,12 +17,25 @@ class TranslateMenu extends Component
 
     public $Filter = "All";
 
+    public function mount($default)
+    {
+        $this->OnTranslateFilterChanged($default);
+    }
+
     public function DrawLessonContent($children)
     {
         $canvas = "";
         foreach($children as $Content)
         {
-             $canvas .= $this->DrawAccordionMenu(false,$Content['Name'],$this->CalulateTranslateAverage($Content['TranslateData']),"bg-lime-200","");
+             $canvas .= $this->DrawAccordionMenu(
+                false,
+                $Content['Name'],
+                $this->CalulateTranslateAverage($Content['TranslateData']),
+                "bg-lime-200",
+                "",
+                $Content['id'],
+                "lessonContent"
+            );
         }
         return $canvas;
     }
@@ -32,8 +45,14 @@ class TranslateMenu extends Component
         $canvas = "";
         foreach($children as $Module)
         {
-             $canvas .= $this->DrawAccordionMenu(false,$Module['Name'],$this->CalulateTranslateAverage($Module['TranslateData']),"bg-amber-100",
-             $this->DrawLessonContent($Module['Children'])
+            $canvas .= $this->DrawAccordionMenu(
+                false,
+                $Module['Name'],
+                $this->CalulateTranslateAverage($Module['TranslateData']),
+                "bg-amber-100",
+                $this->DrawLessonContent($Module['Children']),
+                $Module['id'],
+                "Module"
             );
         }
         return $canvas;
@@ -47,12 +66,16 @@ class TranslateMenu extends Component
                     $Course['Name'],
                     $this->CalulateTranslateAverage($Course['TranslateData']),
                     "bg-white",
-                    $this->DrawModules($Course['Children'])
+                    $this->DrawModules($Course['Children']),
+                    $Course['id'],
+                    "Course"
             );
         }
     }
 
-    public function DrawAccordionMenu($Render,$Language,$Percent,$Color,$WhatsInDropdown){
+    public function DrawAccordionMenu($Render,$Language,$Percent,$Color,$WhatsInDropdown,$id = 0,$type = "nothing"){
+
+        $editButton = "<x-edit-button href=\"/edit/id={$id}/type={$type}\">edit</x-edit-button>";
 
         $Menu = "<div>
                     <x-accordion>
@@ -61,6 +84,7 @@ class TranslateMenu extends Component
                     </x-slot:bgColor>
                         <x-slot:language>
                             {$Language}
+                            {$editButton}
                         </x-slot:language>
 
                         <x-slot:percentage>
@@ -116,6 +140,7 @@ class TranslateMenu extends Component
         $courses = Course::with('Modules.Lessons.LessonContent')->get();
         
         $Tree = LanguageDataCompiler::CreateTranslatedTree($courses,$FilteredLanguages);
+        dd($Tree);
         return view('livewire.translate-menu',[
          'Courses' => $Tree
         ]
