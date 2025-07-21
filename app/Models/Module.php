@@ -10,7 +10,7 @@ class Module extends Model
     use HasFactory;
     
     protected $table = "cp_modules";
-    public $translatables = ["title","subtitle",]; //the parameters in the sql database that are translatable
+    const translatables = ["title","subtitle",]; //the parameters in the sql database that are translatable
 
     public function Course()
     {
@@ -24,15 +24,14 @@ class Module extends Model
 
  public function GetTranslatables()
     {
-        return $this->translatables;
+        return $this::translatables;
     }
 
         public function GetLanguages($SupportedLanguages)
     {
-        //empty($v)
         $translated = [];
 
-        foreach($this->translatables as $translatable)
+        foreach($this::translatables as $translatable)
         {
             $translated[$translatable] = [];
             foreach($SupportedLanguages as $Language)

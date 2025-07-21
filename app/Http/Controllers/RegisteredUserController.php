@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
 
         //Check if user doesn't already exist
         $user = User::where('email', '=', $Attributes['email']);
-        if($user != null)
+        if($user->exists())
         {
             throw ValidationException::withMessages([
                 'email' => 'Account already exists'

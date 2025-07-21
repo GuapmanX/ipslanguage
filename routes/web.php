@@ -14,7 +14,7 @@ use App\Models\Course;
 
 
 require(base_path('resources\php\LanguageDataCompiler.php'));
-$SupportedLanguages = require(base_path('resources\php\Languages.php'));
+$SupportedLanguages = config('languages');
 
 
 

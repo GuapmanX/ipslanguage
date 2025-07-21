@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lesson_revisions', function (Blueprint $table) {
+        Schema::create('cp_lesson_revisions', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('lesson_id');
+            $table->foreign('lesson_id')->references('id')->on('cp_lessons');
+
+            $table->unsignedBigInteger('lesson_content_id');
+            $table->foreign('lesson_content_id')->references('id')->on('cp_lesson_contents');
+
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lesson_revisions');
+        Schema::dropIfExists('cp_lesson_revisions');
     }
 };

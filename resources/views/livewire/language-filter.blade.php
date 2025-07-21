@@ -1,4 +1,4 @@
-<?php $SupportedLanguages = require(base_path('resources\php\Languages.php')); ?>
+<?php $SupportedLanguages = config('languages'); ?>
 
 <div>
     {{-- Be like water. --}}

@@ -29,7 +29,7 @@
 
               @isset($isadmin)
                   @if($isadmin)
-                      <x-nav-link href="admin" :active="request()->is('admin')">Admin Panel</x-nav-link>
+                      <x-nav-link href="/admin" :active="request()->is('admin')">Admin Panel</x-nav-link>
                   @endif
               @endisset
 

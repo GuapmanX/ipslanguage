@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\lessonContent;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\lessonContent>
@@ -14,9 +16,12 @@ class lessonContentFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    public $translated = false;
+
+
     public function definition(): array
     {
-        $languages = require base_path("resources/php/Languages.php");
+        $languages = config('languages');
 
         $constructed = [
             'is_teaser' => 0,
@@ -24,34 +29,39 @@ class lessonContentFactory extends Factory
             'thumbnail' => 'ngbdfgkihwuiauifhhahih',
             'duration' => 312,
             'portrait' => 0,
-            'cta_url' => 'https://somethingsomething.com' //not a real webiste
+            'cta_url' => 'https://somethingsomething.com' //not a real website
         ];
 
-        //title
-        foreach($languages as $language){
-            $constructed['title' . $language['Language_code']] = "TEST_TITLE_" . $language['Language'];
+        foreach(lessonContent::translatables as $translatable)
+        {
+            foreach($languages as $language){
+                $constructed[$translatable . $language['Language_code']] = "TEST" . $language['Language'];
+            }
         }
-
-        //notes
-        foreach($languages as $language){
-            $constructed['notes' . $language['Language_code']] = "TEST_NOTES_" . $language['Language'];
-        }
-
-        //summary
-        foreach($languages as $language){
-            $constructed['summary' . $language['Language_code']] = "TEST_SUMMARY_" . $language['Language'];
-        }
-
-        //video id
-        foreach($languages as $language){
-            $constructed['wistia_video_id' . $language['Language_code']] = "TEST_VIDID_" . $language['Language'];
-        }
-
-        //cta text
-        foreach($languages as $language){
-            $constructed['cta_text' . $language['Language_code']] = "TEST_CTATEXT_" . $language['Language'];
-        }
+        
 
         return $constructed;
+    }
+
+    public function translate()
+    {
+        $languages = config('languages');
+        $this->translated = true;
+        $data = [];
+
+        foreach(lessonContent::translatables as $translatable)
+        {
+            foreach($languages as $language){
+                $data[$translatable . $language['Language_code']] = "TEST" . $language['Language'];
+            }
+        }
+        
+        return $this->state(fn () => $data);
+    }
+
+    public function setToTranslated()
+    {
+        $this->translated = true;
+        return $this;
     }
 }

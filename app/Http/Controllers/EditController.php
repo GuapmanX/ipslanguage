@@ -40,12 +40,12 @@ class EditController extends Controller
         
         $instance = $class::find($id);
 
-        $SupportedLanguages = require(base_path('resources\php\Languages.php'));
+        $SupportedLanguages = config('languages');
         $SelectedLanguage = $SupportedLanguages[$currentUser->selected_language];
         $TranslatableParts = [];
         $OldTranslatableValues = [];
 
-        foreach($instance->translatables as $translatable)
+        foreach($instance->GetTranslatables() as $translatable)
         {
             $uniqueId = $translatable . $SelectedLanguage['Language_code'];
             $TranslatableParts[] = $uniqueId;
@@ -71,12 +71,11 @@ class EditController extends Controller
         $language = $data['language'];
 
         $class = $this->getEloquentModelFromString($type);
-        $SupportedLanguages = require(base_path('resources\php\Languages.php'));
+        $SupportedLanguages = config('languages');
 
         $instance = $class::find($id);
-        foreach($instance->translatables as $translatable){
+        foreach($instance->GetTranslatables() as $translatable){
             $loc = $translatable . $SupportedLanguages[$language]['Language_code'];
-            //$instance->$loc = $data[$loc];
             $instance->update([ $loc => $data[$loc] ]);
         }
 

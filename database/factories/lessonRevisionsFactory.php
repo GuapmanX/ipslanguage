@@ -16,12 +16,30 @@ class lessonRevisionsFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    public $translated = false;
+
+
     public function definition(): array
     {
-        return [
-            'lesson_id' => Lesson::factory(),
-            'lesson_content_id' => lessonContent::factory()
-        ];
+        if($this->translated)
+        {
+            return [
+                'lesson_id' => Lesson::factory()->translate()->create(),
+                'lesson_content_id' => lessonContent::factory()->translate()->setToTranslated()->create()
+            ];
+        }
+        else
+        {
+            return [
+                'lesson_id' => Lesson::factory()->create(),
+                'lesson_content_id' => lessonContent::factory()->create()
+            ];
+        }
     }
+
+     public function translate(){
+        $this->translated = true;
+        return $this;
+     }
 }
 //REVISIONS ARE THE FIRST THAT NEED TO BE FIRED TO GENERATE THE WHOLE SUITE OF COURSES,MODULES AND LESSONS

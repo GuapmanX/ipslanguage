@@ -11,6 +11,7 @@
 |
 */
 
+use App\Models\lessonRevisions;
 use App\Models\User;
 
 pest()->extend(Tests\TestCase::class)
@@ -64,4 +65,43 @@ function CheckChildrenPercent($arr,$desiredPercent){
             foreach($arr as $Translatable){
                expect($Translatable['TranslatedPercent'])->toBe($desiredPercent);
           }
+}
+
+function GetChildrenPercent($arr){
+            $totalPercent = 0;
+            $totalAmount = 0;
+            foreach($arr as $Translatable){
+               $totalPercent += $Translatable['TranslatedPercent'];
+               $totalAmount += 1;
+          }
+    return $totalPercent/$totalAmount;
+}
+
+function CheckChildrenFullyTranslated($arr){
+            $totalPercent = 0;
+            $totalAmount = 0;
+            foreach($arr as $Translatable){
+               $totalPercent += $Translatable['TranslatedPercent'];
+               $totalAmount += 1;
+          }
+    return ($totalPercent/$totalAmount) == 100;
+}
+
+function CreateCourses($amount,$translated)
+{
+    for( $int = 0; $int < $amount; $int += 1)
+    {
+        $LessonRevision = null;
+
+        if($translated){
+            $LessonRevision = lessonRevisions::factory()->translate()->create();
+        }else{
+            $LessonRevision = lessonRevisions::factory()->create();
+        }
+
+            $LessonContent = $LessonRevision->Content;
+            $Lesson = $LessonRevision->Lesson;
+            $Module = $Lesson->Module;
+            $Course = $Module->Course;
+    }
 }

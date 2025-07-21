@@ -11,8 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lessons', function (Blueprint $table) {
+        Schema::create('cp_lessons', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('module_id');
+            $table->foreign('module_id')->references('id')->on('cp_modules');
+
+            $table->unsignedTinyInteger('order');
+            $table->boolean('active')->default(0);
+            $table->text('share_id')->charset('utf8mb4')->nullable();
+            $table->boolean('allowed_on_discovery')->default(1);
+
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lessons');
+        Schema::dropIfExists('cp_lessons');
     }
 };

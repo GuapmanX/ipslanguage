@@ -125,7 +125,7 @@ class TranslateMenu extends Component
 
     public function render()
     {
-        $SupportedLanguages = require(base_path('resources\php\Languages.php'));
+        $SupportedLanguages = config('languages');
 
         $FilteredLanguages = [];
         if($this->Filter == "All")
@@ -140,7 +140,6 @@ class TranslateMenu extends Component
         $courses = Course::with('Modules.Lessons.LessonContent')->get();
         
         $Tree = LanguageDataCompiler::CreateTranslatedTree($courses,$FilteredLanguages);
-        dd($Tree);
         return view('livewire.translate-menu',[
          'Courses' => $Tree
         ]

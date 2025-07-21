@@ -10,7 +10,9 @@ class Course extends Model
     use HasFactory;
 
     protected $table = "cp_courses";
-    public $translatables = ["title","description"]; //the parameters in the sql database that are translatable
+    const translatables = ["title","description"]; //the parameters in the sql database that are translatable
+    //public $translatables = $this::translatables; //keeping this so i dont have to go through everything to change it
+
     protected $guarded = ['id'];
 
     public function Modules()
@@ -20,7 +22,7 @@ class Course extends Model
 
     public function GetTranslatables()
     {
-        return $this->translatables;
+        return $this::translatables;
     }
 
     public function GetLanguages($SupportedLanguages)
@@ -28,7 +30,7 @@ class Course extends Model
         //empty($v)
         $translated = [];
 
-        foreach($this->translatables as $translatable)
+        foreach($this::translatables as $translatable)
         {
             $translated[$translatable] = [];
             foreach($SupportedLanguages as $Language)

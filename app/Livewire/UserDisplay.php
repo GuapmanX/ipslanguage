@@ -24,7 +24,7 @@ class UserDisplay extends Component
 
     public function GetLanguagePercentage($language)
     {
-        $SupportedLanguages = require(base_path('resources\php\Languages.php'));
+        $SupportedLanguages = config('languages');
         $Tree = LanguageDataCompiler::CreateTranslatedTree($this->courses,[$SupportedLanguages[$language]]);
 
 

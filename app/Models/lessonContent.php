@@ -9,7 +9,7 @@ class lessonContent extends Model
 {
     use HasFactory;
     protected $table = "cp_lesson_contents";
-    public $translatables = ["title","notes","summary","cta_text"]; //the parameters in the sql database that are translatable
+    const translatables = ["title","notes","summary","cta_text","wistia_video_id"]; //the parameters in the sql database that are translatable
     private $ContentLinkTable = "cp_lesson_revisions";
     protected $guarded = ['id'];
 
@@ -20,7 +20,7 @@ class lessonContent extends Model
 
     public function GetTranslatables()
     {
-        return $this->translatables;
+        return $this::translatables;
     }
 
     public function GetLanguages($SupportedLanguages)
@@ -28,7 +28,7 @@ class lessonContent extends Model
         //empty($v)
         $translated = [];
 
-        foreach($this->translatables as $translatable)
+        foreach($this::translatables as $translatable)
         {
             $translated[$translatable] = [];
             foreach($SupportedLanguages as $Language)

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,9 +15,10 @@ class CourseFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
     public function definition(): array
     {
-        $languages = require base_path("resources/php/Languages.php");
+        $languages = config('languages');
 
 
         $constructed = [
@@ -37,17 +39,26 @@ class CourseFactory extends Factory
             'etag' => 'AUYGUIFDGIG(%@%(*@%%432'
         ];
 
-        //title
-        foreach($languages as $language){
-            $constructed['title' . $language['Language_code']] = "TEST_TITLE_" . $language['Language'];
-        }
-
-        //description
-        foreach($languages as $language){
-            $constructed['description' . $language['Language_code']] = "TEST_DESCRIPTION_" . $language['Language'];
-        }
-
 
         return $constructed;
     }
+
+
+    public function translate()
+    {
+        $attribs = [];
+
+        $languages = config('languages');
+
+        foreach(Course::translatables as $translatable)
+        {
+            foreach($languages as $language){
+                $attribs[$translatable . $language['Language_code']] = "TEST" . $language['Language'];
+            }
+        }
+
+
+        return $this->state(fn () => $attribs);
+    }
+
 }

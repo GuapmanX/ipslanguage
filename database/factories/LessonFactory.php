@@ -15,16 +15,31 @@ class LessonFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    public $translated = false;
+
     public function definition(): array
     {
         $constructed = [
-            'module_id' => Module::factory(),
             'order' => 144,
             'active' => 1,
             'allowed_on_discovery' => 1,
             'share_id' => 'FAKEFAKEFAKE'
         ];
 
+        if($this->translated){
+            $constructed['module_id'] = Module::factory()->translate()->setToTranslated()->create();
+        }
+        else{
+            $constructed['module_id'] = Module::factory()->create();
+        }
+
+
         return $constructed;
+    }
+
+    public function translate()
+    {
+        $this->translated = true;
+        return $this;
     }
 }
