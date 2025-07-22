@@ -4,8 +4,6 @@ namespace Database\Factories;
 
 use App\Models\lessonContent;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\lessonContent>
  */
@@ -18,26 +16,18 @@ class lessonContentFactory extends Factory
      */
     public $translated = false;
 
-
     public function definition(): array
     {
         $languages = config('languages');
 
         $constructed = [
-            'is_teaser' => 0,
-            'available_from' => null,
-            'thumbnail' => 'ngbdfgkihwuiauifhhahih',
-            'duration' => 312,
-            'portrait' => 0,
-            'cta_url' => 'https://somethingsomething.com' //not a real website
+            'is_teaser' => fake()->boolean(),
+            'available_from' => fake()->time(),
+            'thumbnail' => fake()->domainName(),
+            'duration' => fake()->numberBetween(0,1000),
+            'portrait' => fake()->boolean(),
+            'cta_url' => fake()->domainName() //not a real website
         ];
-
-        foreach(lessonContent::translatables as $translatable)
-        {
-            foreach($languages as $language){
-                $constructed[$translatable . $language['Language_code']] = "TEST" . $language['Language'];
-            }
-        }
         
 
         return $constructed;
@@ -52,7 +42,7 @@ class lessonContentFactory extends Factory
         foreach(lessonContent::translatables as $translatable)
         {
             foreach($languages as $language){
-                $data[$translatable . $language['Language_code']] = "TEST" . $language['Language'];
+                $data[$translatable . $language['Language_code']] = fake()->sentence();
             }
         }
         

@@ -25,12 +25,12 @@ class ModuleFactory extends Factory
 
 
         $constructed = [
-            'order' => 1,
-            'is_coming_soon' => 0,
-            'ignore_progress' => 1,
-            'active' => 0,
-            'completion_campaign_started_tag' => null,
-            'completed_tag' => 6868
+            'order' => fake()->numberBetween(1,9),
+            'is_coming_soon' => fake()->boolean(),
+            'ignore_progress' => fake()->boolean(),
+            'active' => fake()->boolean(),
+            'completion_campaign_started_tag' => fake()->numberBetween(1,10000),
+            'completed_tag' => fake()->numberBetween(1,10000)
 
         ];
 
@@ -57,7 +57,7 @@ class ModuleFactory extends Factory
         foreach(Module::translatables as $translatable)
         {
             foreach($languages as $language){
-                $attribs[$translatable . $language['Language_code']] = "TEST" . $language['Language'];
+                $attribs[$translatable . $language['Language_code']] = fake()->sentence();
             }
         }
 

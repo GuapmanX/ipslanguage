@@ -22,23 +22,22 @@ class CourseFactory extends Factory
 
 
         $constructed = [
-            'author' => 'John Doe',
-            'product_slug' => '12 gauge',
-            'domain' => 'ips',
-            'cover_square' => 313213,
-            'cover_wide' => 313213,
-            'cover_locked' => 313213,
-            'cover_menu' => 313213,
-            'unlocked_order' => 1,
-            'locked_order' => 1,
-            'legacy_product' => 0,
-            'purchase_tag' => 1,
-            'completion_campaign_started_tag' => 1,
-            'completion_campaign_ended_tag' => 1,
-            'is_active' => 1,
-            'etag' => 'AUYGUIFDGIG(%@%(*@%%432'
+            'author' => fake()->name(),
+            'product_slug' => fake()->sentence(),
+            'domain' => fake()->domainName(),
+            'cover_square' => fake()->numberBetween(1,10000),
+            'cover_wide' => fake()->numberBetween(1,10000),
+            'cover_locked' => fake()->numberBetween(1,10000),
+            'cover_menu' => fake()->numberBetween(1,10000),
+            'unlocked_order' => fake()->numberBetween(1,9),
+            'locked_order' => fake()->numberBetween(1,9),
+            'legacy_product' => fake()->boolean(),
+            'purchase_tag' => fake()->numberBetween(1,10000),
+            'completion_campaign_started_tag' => fake()->numberBetween(1,10000),
+            'completion_campaign_ended_tag' => fake()->numberBetween(1,10000),
+            'is_active' => fake()->numberBetween(1,10000),
+            'etag' => fake()->regexify('[A-Za-z]{15}')
         ];
-
 
         return $constructed;
     }
@@ -53,7 +52,7 @@ class CourseFactory extends Factory
         foreach(Course::translatables as $translatable)
         {
             foreach($languages as $language){
-                $attribs[$translatable . $language['Language_code']] = "TEST" . $language['Language'];
+                $attribs[$translatable . $language['Language_code']] = fake()->sentence();
             }
         }
 

@@ -20,10 +20,10 @@ class LessonFactory extends Factory
     public function definition(): array
     {
         $constructed = [
-            'order' => 144,
-            'active' => 1,
-            'allowed_on_discovery' => 1,
-            'share_id' => 'FAKEFAKEFAKE'
+            'order' => fake()->numberBetween(1,1000),
+            'active' => fake()->boolean(),
+            'allowed_on_discovery' => fake()->boolean(),
+            'share_id' => fake()->regexify('[A-Za-z]{10}')
         ];
 
         if($this->translated){
