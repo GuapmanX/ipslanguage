@@ -5,6 +5,18 @@ namespace LanguageCompiler;
 if(!class_exists(__NAMESPACE__ . '\LanguageDataCompiler')){ //for some reason the test suite redifines this function causing errors so this is the solution
     
     class LanguageDataCompiler{
+
+        public static function ReturnLanguageArray($languages)
+        {
+            $SupportedLanguages = config('languages');
+            $data = [];
+
+            foreach($languages as $language){
+                $data[$language] = $SupportedLanguages[$language];
+            }
+            return $data;
+        }
+
         private static function GiveTranslatedPercentage($arr,$Translatables){
             $result = [];
 

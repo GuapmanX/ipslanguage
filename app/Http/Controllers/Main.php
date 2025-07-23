@@ -14,8 +14,9 @@ class Main extends Controller
 
         return view('home',[
               'email' => $currentUser->email,
-              'Language' => $currentUser->selected_language,
-              'is_admin' => $currentUser->is_admin
+              'Languages' => explode(',',$currentUser->selected_language),
+              'is_admin' => $currentUser->is_admin,
+              //'langarr' => [Spanish, English]
              ]);
     }
 }

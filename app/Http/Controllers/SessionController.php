@@ -34,7 +34,6 @@ class SessionController extends Controller
 
     public function destroy()
     {
-        //dd('tyrone the create said yao ming or something');
         Auth::logout();
 
         return redirect('/');

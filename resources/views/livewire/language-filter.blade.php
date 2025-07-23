@@ -1,5 +1,3 @@
-<?php $SupportedLanguages = config('languages'); ?>
-
 <div>
     {{-- Be like water. --}}
     <p><strong>Filter Languages:</strong></p>

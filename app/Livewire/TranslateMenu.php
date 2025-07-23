@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Blade;
 use Livewire\Attributes\On;
 use LanguageCompiler;
 use LanguageCompiler\LanguageDataCompiler;
+use Illuminate\Support\Facades\Auth;
 
 class TranslateMenu extends Component
 {
@@ -126,11 +127,18 @@ class TranslateMenu extends Component
     public function render()
     {
         $SupportedLanguages = config('languages');
+        $CurrentUser = Auth::user();
 
         $FilteredLanguages = [];
         if($this->Filter == "All")
         {
-            $FilteredLanguages = $SupportedLanguages;
+            if($CurrentUser->is_admin){
+                $FilteredLanguages = $SupportedLanguages;
+            }
+            else
+            {
+                $FilteredLanguages = LanguageDataCompiler::ReturnLanguageArray(explode(',',$CurrentUser->selected_language));
+            }
         }
         else
         {

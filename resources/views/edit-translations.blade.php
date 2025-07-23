@@ -6,16 +6,6 @@
         {{ $email }}
     </x-slot:email>
 
-        @if ($is_admin)
-            <p>id: {{ $translatable_id }} type: {{ $translatable_type }}</p>
-
-        
-            
-            @foreach ($translatables as $translatable)
-                <p>{{$translatable}}</p>
-            @endforeach
-
-        @else
             <p>Welcome to the editing section, editor</p>
 
             <form method="POST" action="/edit">
@@ -50,6 +40,5 @@
         </div>
         
       </form>
-        @endif
 
 </x-layout>

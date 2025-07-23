@@ -25,7 +25,8 @@ class UserDisplay extends Component
     public function GetLanguagePercentage($language)
     {
         $SupportedLanguages = config('languages');
-        $Tree = LanguageDataCompiler::CreateTranslatedTree($this->courses,[$SupportedLanguages[$language]]);
+        $Languages = LanguageDataCompiler::ReturnLanguageArray(explode(',',$language));
+        $Tree = LanguageDataCompiler::CreateTranslatedTree($this->courses,$Languages);
 
 
         $totalPercentage = 0;

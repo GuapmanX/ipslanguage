@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\lessonContent;
+use LanguageCompiler\LanguageDataCompiler;
 
 use function PHPSTORM_META\type;
 
@@ -41,16 +42,25 @@ class EditController extends Controller
         $instance = $class::find($id);
 
         $SupportedLanguages = config('languages');
-        $SelectedLanguage = $SupportedLanguages[$currentUser->selected_language];
+        $SelectedLanguages = LanguageDataCompiler::ReturnLanguageArray(explode(',',$currentUser->selected_language)); //[$SupportedLanguages[$currentUser->selected_language]];
         $TranslatableParts = [];
         $OldTranslatableValues = [];
 
-        foreach($instance->GetTranslatables() as $translatable)
+        if($currentUser->is_admin)
         {
-            $uniqueId = $translatable . $SelectedLanguage['Language_code'];
-            $TranslatableParts[] = $uniqueId;
-            $OldTranslatableValues[$uniqueId] = $instance->$uniqueId;
+            //gives access to all languages to admins
+            $SelectedLanguages = $SupportedLanguages;
+        }
 
+        foreach($SelectedLanguages as $language)
+        {
+                foreach($instance->GetTranslatables() as $translatable)
+                {
+                    $uniqueId = $translatable . $language['Language_code'];
+                    $TranslatableParts[] = $uniqueId;
+                    $OldTranslatableValues[$uniqueId] = $instance->$uniqueId;
+
+                }
         }
 
         return view('edit-translations',[
@@ -68,15 +78,26 @@ class EditController extends Controller
         $data = request()->all();
         $type = $data['type'];
         $id = intval($data['id']);
-        $language = $data['language'];
+        $currentUser = Auth::user();
+
 
         $class = $this->getEloquentModelFromString($type);
         $SupportedLanguages = config('languages');
+        $SelectedLanguages = LanguageDataCompiler::ReturnLanguageArray(explode(',',$currentUser->selected_language)); //[$SupportedLanguages[$data['language']]];
+
+        if($currentUser->is_admin)
+        {
+            //gives access to all languages to admins
+            $SelectedLanguages = $SupportedLanguages;
+        }
 
         $instance = $class::find($id);
-        foreach($instance->GetTranslatables() as $translatable){
-            $loc = $translatable . $SupportedLanguages[$language]['Language_code'];
-            $instance->update([ $loc => $data[$loc] ]);
+        foreach($SelectedLanguages as $language)
+        {
+            foreach($instance->GetTranslatables() as $translatable){
+                $loc = $translatable . $SupportedLanguages[$language['Language']]['Language_code'];
+                $instance->update([ $loc => $data[$loc] ]);
+            }
         }
 
         return redirect('/');
