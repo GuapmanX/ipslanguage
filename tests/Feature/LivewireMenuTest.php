@@ -11,15 +11,22 @@ use Livewire\Livewire;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
 
 test('Translate Menu gets rendered', function(){
+    $user = User::factory()->create();
+    actingAs($user);
+    
     $menu = Livewire::test(TranslateMenu::class, [ 'default' => 'All' ]);
     $menu->assertStatus(200);
 });
 
 test('Filter Menu gets rendered', function(){
+    $user = User::factory()->create();
+    actingAs($user);
+
     $menu = Livewire::test(LanguageFilter::class);
     $menu->assertStatus(200);
 });
@@ -32,7 +39,10 @@ test('User display gets rendered', function(){
 
 
 test('Filter can be changed', function(){
-    $languages = config('languages');;
+    $user = User::factory()->create();
+    actingAs($user);
+
+    $languages = config('languages');
     $selectedLanguage = SelectRandomLanguage($languages)['Language'];
 
     $filter = Livewire::test(LanguageFilter::class);
@@ -42,6 +52,9 @@ test('Filter can be changed', function(){
 });
 
 test('Can change shown language in the menu',function(){
+    $user = User::factory()->create();
+    actingAs($user);
+
     $languages = config('languages');
     $selectedLanguage = SelectRandomLanguage($languages)['Language'];
 
