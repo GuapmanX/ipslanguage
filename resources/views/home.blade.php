@@ -12,11 +12,12 @@
         @else
             @if(sizeof($Languages) > 1)
                 <livewire:LanguageFilter>
+                <livewire:TranslateMenu default="All">
             @else
                 <p class="text-xl"><strong>Language: {{ $Languages[0] }}</strong></p>
+                <livewire:TranslateMenu default="{{ $Languages[0] }}">
             @endif
 
-            <livewire:TranslateMenu default="{{ $Languages[0] }}">
         @endif
 
 </x-layout>

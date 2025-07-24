@@ -83,7 +83,7 @@ class EditController extends Controller
 
         $class = $this->getEloquentModelFromString($type);
         $SupportedLanguages = config('languages');
-        $SelectedLanguages = LanguageDataCompiler::ReturnLanguageArray(explode(',',$currentUser->selected_language)); //[$SupportedLanguages[$data['language']]];
+        $SelectedLanguages = LanguageDataCompiler::ReturnLanguageArray(explode(',',$currentUser->selected_language));
 
         if($currentUser->is_admin)
         {

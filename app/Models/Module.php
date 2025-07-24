@@ -12,6 +12,8 @@ class Module extends Model
     protected $table = "cp_modules";
     const translatables = ["title","subtitle",]; //the parameters in the sql database that are translatable
 
+    protected $guarded = ['id'];
+
     public function Course()
     {
         return $this->belongsTo(Course::class); //Gets the Course that the module belongs to

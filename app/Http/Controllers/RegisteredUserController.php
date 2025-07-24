@@ -15,7 +15,7 @@ class RegisteredUserController extends Controller
     //
     public function create()
     {
-        $SupportedLanguages = require(base_path('resources\php\Languages.php'));
+        $SupportedLanguages = config('languages');
         return view('auth.register',[
             'SupportedLanguages' => $SupportedLanguages
         ]);

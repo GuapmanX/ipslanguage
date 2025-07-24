@@ -76,7 +76,8 @@ class TranslateMenu extends Component
 
     public function DrawAccordionMenu($Render,$Language,$Percent,$Color,$WhatsInDropdown,$id = 0,$type = "nothing"){
 
-        $editButton = "<x-edit-button href=\"/edit/id={$id}/type={$type}\">edit</x-edit-button>";
+        //$editButton = "<x-edit-button href=\"/edit/id={$id}/type={$type}\">edit</x-edit-button>";
+        $editButton = "<x-edit-button href=\"/edit/{$type}/{$id}\">edit</x-edit-button>";
 
         $Menu = "<div>
                     <x-accordion>

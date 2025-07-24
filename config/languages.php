@@ -1,20 +1,10 @@
 <?php 
 
-/*return [
-    'Arabic' => '_ar',
-    'German' => '_de',
-    'Spanish' => '_es',
-    'French' => '_fr',
-    'Italian' => '_it',
-    'Polish' => '_pl',
-    'Portugese' => '_pt'
-];*/
-
 return [
-    'English' => [
+    /* 'English' => [
         'Language' => 'English',
         'Language_code' => ''
-    ],
+    ],  */
     'Arabic' => [
         'Language' => 'Arabic',
         'Language_code' => '_ar'

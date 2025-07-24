@@ -13,12 +13,13 @@ class AdminController extends Controller
     {
 
         $currentUser = Auth::user();
-        $users = User::where('is_admin', false)->get(); //gets only non admin users
 
         if(!$currentUser->is_admin)
         {
             return redirect('/');
         }
+
+        $users = User::where('is_admin', false)->get(); //gets only non admin users
 
         return view('admin-panel',[
                 'email' => $currentUser->email,

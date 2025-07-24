@@ -13,6 +13,7 @@
 
 use App\Models\lessonRevisions;
 use App\Models\User;
+use Illuminate\Support\Collection;
 
 pest()->extend(Tests\TestCase::class)
  // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
@@ -49,16 +50,11 @@ function login($user = null)
     return test()->actingAs($user ?? User::factory()->create());
 }
 
+
+//array_keys
 function SelectRandomLanguage($languages){
-    $selected = rand(0, sizeof($languages) - 1);
-    $current = 0;
-    foreach($languages as $language)
-    {
-        if($selected == $current){
-            return $language;
-        }
-        $current++;
-    }
+    $collection = collect($languages);
+    return $collection->random();
 }
 
 function CheckChildrenPercent($arr,$desiredPercent){
