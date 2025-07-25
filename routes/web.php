@@ -15,9 +15,6 @@ use App\Models\Course;
 use App\Models\lessonContent;
 use App\Models\Module;
 
-//use App\Models\Lesson;
-//use Illuminate\Support\Facades\DB;
-
 
 require(base_path('resources\php\LanguageDataCompiler.php'));
 
@@ -35,11 +32,6 @@ Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
 Route::get('/admin', [AdminController::class, 'index'])->middleware('auth');
-
-//Route::get('/edit/id={id:slug}/type={type:slug}',[EditController::class, 'index'])->middleware('auth');
-//Route::post('/edit',[EditController::class,'store'])->middleware('auth');
-
-
 
 Route::get('/edit/Course/{id}', [CourseController::class, 'edit'])->middleware('auth');
 Route::post('/edit/Course/{id}', [CourseController::class, 'update'])->middleware('auth');
