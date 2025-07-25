@@ -49,7 +49,7 @@ class UserDisplay extends Component
                 }
             }
         }
-        return $totalPercentage/$totalAmount;
+        return round($totalPercentage/$totalAmount);
     }
 
     public function mount($users)

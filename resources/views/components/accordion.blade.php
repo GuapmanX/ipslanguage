@@ -10,13 +10,13 @@
           <span class="font-medium text-gray-800">{{$language}}</span>
         </div>
         <div class="flex items-center space-x-4">
-          <div class="w-32 h-2 bg-gray-200 rounded">
+          <div class="w-32 h-2 bg-gray-500 rounded">
             <div class="bg-green-500 h-2 rounded" style="width: {{$percentage}}%"></div>
           </div>
           <span class="text-gray-500 text-sm">{{$percentage}}%</span>
           @if(strlen($text) > 0)
-            <svg class="w-4 h-4 text-gray-400 rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          <svg class="w-4 h-4 text-gray-400 rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           @endif
         </div>

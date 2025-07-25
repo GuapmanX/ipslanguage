@@ -3,18 +3,13 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models;
 use App\Models\Course;
-use Illuminate\Support\Facades\Blade;
 use Livewire\Attributes\On;
-use LanguageCompiler;
 use LanguageCompiler\LanguageDataCompiler;
 use Illuminate\Support\Facades\Auth;
 
 class TranslateMenu extends Component
 {
-    //public $TranslateData = Course::all();
-
 
     public $Filter = "All";
 
@@ -30,7 +25,7 @@ class TranslateMenu extends Component
         {
             $TotalPercent += $Data['TranslatedPercent'];
         }
-        return $TotalPercent/count($arr);
+        return round($TotalPercent/count($arr));
     }
 
     #[On('FilterChanged')]
